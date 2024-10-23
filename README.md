@@ -1,4 +1,4 @@
-# Organigramma_IngegneriaDelSoftware
+# Organigramma
 Il codice permette di creare un organigramma. Lo sviluppo è suddiviso in Front-end(Flutter) e Back-end(Spring-Boot).
 
 # FRONT-END:
