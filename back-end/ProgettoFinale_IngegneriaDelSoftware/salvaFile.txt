@@ -1,0 +1,24 @@
+Organigramma: PROVADATABASE visualizzazione: TopToBottom
+ Nome Unità Organizzativa provaDB
+ CONTIENE I GRUPPI: 
+Nome del gruppo: gruppoDB
+ CONTIENE I DIPENDENTI: 
+Nome: giova, Cognome: cito, Ruolo: prova
+                        NOME ORGANIGRAMMA: PROVADATABASE
+
+NOME UNITA' ORGANIZZATIVA: provaDB
+
+	NOME GRUPPO: gruppoDB
+		NOME DEI DIPENDENTI DEL GRUPPO:
+			Nome: giova, Cognome: cito, Ruolo: prova
+
+
+NOME ORGANIGRAMMA: CitoSKI
+
+NOME UNITA' ORGANIZZATIVA: consiglio di amministrazione 
+
+	NOME GRUPPO: gruppoA
+		NOME DEI DIPENDENTI DEL GRUPPO:
+			Nome: francescp, Cognome: rufius, Ruolo: direttore
+
+
