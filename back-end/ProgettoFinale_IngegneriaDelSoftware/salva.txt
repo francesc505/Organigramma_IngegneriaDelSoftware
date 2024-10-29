@@ -1,4 +1,1 @@
-Organigramma{nome_organigramma='PROVADATABASE', visualizationType='TopToBottom', unitaList=[UnitaOrganizzativa{nome='provaDB', gruppi=[Gruppo{nome='gruppoDB', dipendenti=[Dipendente{nome='giova', cognome='cito', ruolo='prova'}]}]}]}
-1provaDB contiene i gruppi: 
-1gruppoDBcontiene i dipendenti: 
-1 giova cito prova
+
