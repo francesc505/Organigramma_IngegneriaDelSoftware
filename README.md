@@ -9,7 +9,7 @@ Le classi principali si trovano nella cartella lib e \lib\model.
 # BACK-END 
 Per visualizzare le cartelle che contengono le classi e l'utilizzo dei diversi pattern presenti nel progetto, visualizza: src\main\java\... 
 
-#IMPORTANTE 
+# IMPORTANTE 
 modificare il file: "application.properties". Bisogna solo creare un Data Base, e modificare i campi presenti, le tabelle verranno costruite non appena di avvierà il back-end del progetto 
 
 # NOTA
