@@ -14,5 +14,5 @@ modificare il file: "application.properties". Bisogna solo creare un Data Base, 
 
 # NOTA
 Per poter utilizzare il DTO e il Mapper, non si è potuta stabilire la relazione tra User e Organigramma in quanto la prima è astratta ( per la corretta impostazione del Patter FACTORY METHOD ), questo crea un  conflitto con la procedura di creazione del Mapper. 
-Se non si utilizza il mapper e quindi si "uncomment" , il codice all'interno del DBSave e si commenta il codice che attualmente utilizza i DTO e il Mapper, e eliminando le tabelle, si creano nuovamente tutte le tabelle e in questo caso si va a creare la relazione 
+Se non si utilizza il mapper e quindi si "uncomment" , il codice all'interno del DBSave e si commenta il codice che attualmente utilizza i DTO , il Mapper, e eliminando le tabelle, si creano nuovamente tutte le tabelle e in questo caso si va a creare la relazione 
 tra User e Organigramma.
