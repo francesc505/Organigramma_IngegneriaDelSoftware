@@ -1,9 +1,12 @@
 package com.example.ProgettoFinale_IngegneriaDelSoftware.Strategy;
 
 import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Leaf.Dipendente;
-import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.other.Gruppo;
-import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.other.Organigramma;
-import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.other.UnitaOrganizzativa;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Composite.Gruppo;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Composite.Organigramma;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Composite.UnitaOrganizzativa;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.DTO.OrganigrammaDTO;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.Mapper.OrganigrammaDTOMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,10 +21,14 @@ import java.io.IOException;
 @CrossOrigin
 public class FileSave implements SaveStrategy {
 
+    @Autowired
+    OrganigrammaDTOMapper organigrammaDTOMapper;
 
     @PostMapping(value = "/salvaOrganigrammaFile", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> save(@RequestBody Organigramma organigramma) {
+    public ResponseEntity<String> save(@RequestBody OrganigrammaDTO organigrammaDTO) {
         String filePath = "salvaFile.txt"; // Specifica il percorso del file
+
+        Organigramma organigramma = organigrammaDTOMapper.toEntity(organigrammaDTO);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             // Centro il nome dell'organigramma

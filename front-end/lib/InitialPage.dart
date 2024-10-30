@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:front_end_ing_software/model/Dipendente.dart';
-import 'package:front_end_ing_software/model/Gruppo.dart';
-import 'package:front_end_ing_software/model/Unita.dart';
+import 'package:front_end_ing_software/model/DipendenteDTO.dart';
+import 'package:front_end_ing_software/model/GruppoDTO.dart';
+import 'package:front_end_ing_software/model/UnitaOrganizzativaDTO.dart';
+import 'package:front_end_ing_software/model/User.dart';
 import 'main.dart'; // Assicurati di importare MyHomePage
 import 'package:graphview/GraphView.dart';
 
 class InitialPage extends StatefulWidget {
   final bool flag;
+  final User user;
   const InitialPage({
     Key? key,
     required this.flag,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -18,6 +21,7 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   late bool flag = widget.flag;
+  late User user = widget.user;
 
   final TextEditingController unitController = TextEditingController();
   final TextEditingController roleController = TextEditingController();
@@ -34,9 +38,9 @@ class _InitialPageState extends State<InitialPage> {
   Map<String, Map<Node, List<Node>>> proviamo =
       <String, Map<Node, List<Node>>>{};
   Map<Node, List<Graph>> nodeGraphs = <Node, List<Graph>>{};
-  Map<String, List<Dipendente>> gruppoDipendente = <String, List<Dipendente>>{};
-  Map<String, List<Gruppo>> unitaGruppo = <String, List<Gruppo>>{};
-  List<Unita> listaUnita = [];
+  Map<String, List<DipendenteDTO>> gruppoDipendente = <String, List<DipendenteDTO>>{};
+  Map<String, List<GruppoDTO>> unitaGruppo = <String, List<GruppoDTO>>{};
+  List<UnitaOrgnizzativaDTO> listaUnita = [];
 
   Graph graph = Graph();
   BuchheimWalkerConfiguration builderConfig = BuchheimWalkerConfiguration();
@@ -139,6 +143,7 @@ class _InitialPageState extends State<InitialPage> {
           unitaGruppo: unitaGruppo,
           listaUnita: listaUnita,
           flag: flag,
+          user: user,
         ),
       ),
     );
@@ -164,6 +169,7 @@ class _InitialPageState extends State<InitialPage> {
         unitaGruppo = result['unitaGruppo'] ?? unitaGruppo;
         listaUnita = result['listaUnita'] ?? listaUnita;
         flag = result['flag'] ?? flag;
+        user = result['user'] ?? user;
       });
     }
   }
@@ -216,53 +222,54 @@ class _InitialPageState extends State<InitialPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    if(flag)
-                    TextField(
-                      controller: roleController,
-                      decoration: const InputDecoration(
-                        labelText: 'Inserisci Ruolo',
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
+                    if (flag)
+                      TextField(
+                        controller: roleController,
+                        decoration: const InputDecoration(
+                          labelText: 'Inserisci Ruolo',
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
                         ),
                       ),
-                    ),
-                    if(flag)
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        backgroundColor: Colors.blue, // Colore principale
-                        foregroundColor: Colors.white, // Colore del testo
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    if (flag)
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          backgroundColor: Colors.blue, // Colore principale
+                          foregroundColor: Colors.white, // Colore del testo
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
+                        onPressed: addRole,
+                        child: const Text('Aggiungi Ruolo'),
                       ),
-                      onPressed: addRole,
-                      child: const Text('Aggiungi Ruolo'),
-                    ),
                   ],
                 ),
               ),
             ),
             const SizedBox(height: 10),
-            if(flag)
-            Expanded(
-              child: Card(
-                elevation: 4,
-                child: ListView.builder(
-                  itemCount: roles.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(roles[index], style: TextStyle(fontSize: 18)),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.blue),
-                        onPressed: () => editRole(index),
-                      ),
-                    );
-                  },
+            if (flag)
+              Expanded(
+                child: Card(
+                  elevation: 4,
+                  child: ListView.builder(
+                    itemCount: roles.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title:
+                            Text(roles[index], style: TextStyle(fontSize: 18)),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.edit, color: Colors.blue),
+                          onPressed: () => editRole(index),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: 10),
             Center(
               // Centra il pulsante

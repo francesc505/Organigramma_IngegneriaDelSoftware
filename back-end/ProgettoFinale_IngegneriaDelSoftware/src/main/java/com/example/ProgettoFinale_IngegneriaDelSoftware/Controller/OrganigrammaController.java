@@ -1,8 +1,8 @@
 package com.example.ProgettoFinale_IngegneriaDelSoftware.Controller;
 
 import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Leaf.Dipendente;
-import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.other.Gruppo;
-import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.other.UnitaOrganizzativa;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Composite.Gruppo;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Composite.UnitaOrganizzativa;
 import com.example.ProgettoFinale_IngegneriaDelSoftware.Facade.OrganigrammaFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

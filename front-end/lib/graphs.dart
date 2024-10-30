@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:front_end_ing_software/model/Dipendente.dart';
-import 'package:front_end_ing_software/model/Gruppo.dart';
-import 'package:front_end_ing_software/model/Unita.dart';
+import 'package:front_end_ing_software/model/DipendenteDTO.dart';
+import 'package:front_end_ing_software/model/GruppoDTO.dart';
+import 'package:front_end_ing_software/model/UnitaOrganizzativaDTO.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:front_end_ing_software/main.dart';
 
@@ -24,9 +24,9 @@ class Graphs extends StatefulWidget {
   final Map<Node, List<String>> listaGroup;
   final Map<String, List<Employer>> groupEmp;
   final Map<Node, List<Node>> pro;
-  final Map<String, List<Dipendente>> gruppoDipendente;
-  final Map<String, List<Gruppo>> unitaGruppo;
-  final List<Unita> listaUnita;
+  final Map<String, List<DipendenteDTO>> gruppoDipendente;
+  final Map<String, List<GruppoDTO>> unitaGruppo;
+  final List<UnitaOrgnizzativaDTO> listaUnita;
 
 
 

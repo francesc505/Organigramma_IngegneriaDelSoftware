@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:front_end_ing_software/InitialPage.dart';
 import 'package:front_end_ing_software/model/LoginF.dart';
+import 'package:front_end_ing_software/model/User.dart';
 import 'package:front_end_ing_software/register.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +13,8 @@ class Login extends StatefulWidget {
   // ignore: library_private_types_in_public_api
   _LoginState createState() => _LoginState();
 }
+
+Loginf loginf = new Loginf(userType: "", email: "", password: "");
 
 class _LoginState extends State<Login> {
   final TextEditingController _usernameController = TextEditingController();
@@ -24,7 +27,7 @@ class _LoginState extends State<Login> {
         'Username: ${_usernameController.text}, Password: ${_passwordController.text}, Tipo di utente: $userType');
     print(_isAdmin);
     print(userType);
-    Loginf loginf = new Loginf(
+    loginf = new Loginf(
         userType: userType,
         email: _usernameController.text,
         password: _passwordController.text);
@@ -41,6 +44,11 @@ class _LoginState extends State<Login> {
 
     print(response.statusCode);
     if (response.statusCode == 200) {
+      User user = User(
+          email: _usernameController.text,
+          password: _passwordController.text,
+          UserType: userType);
+
       _usernameController.text = "";
       _passwordController.text = "";
       final result = await Navigator.push(
@@ -48,6 +56,7 @@ class _LoginState extends State<Login> {
           MaterialPageRoute(
             builder: (context) => InitialPage(
               flag: _isAdmin,
+              user: user,
             ),
           ));
 

@@ -1,0 +1,7 @@
+NOME ORGANIGRAMMA: Organigramma
+
+NOME UNITA' ORGANIZZATIVA: Vendite
+
+	NOME GRUPPO: gruppoProvaDTO
+		NOME DEI DIPENDENTI DEL GRUPPO:
+			Nome: francesco, Cognome: provaDTO, Ruolo: direttore

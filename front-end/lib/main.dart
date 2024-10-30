@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 //import 'package:front_end_ing_software/InitialPage.dart';
 import 'package:front_end_ing_software/graphs.dart';
 import 'package:front_end_ing_software/login.dart';
-import 'package:front_end_ing_software/model/Dipendente.dart';
-import 'package:front_end_ing_software/model/Gruppo.dart';
-import 'package:front_end_ing_software/model/Organigramma.dart';
-import 'package:front_end_ing_software/model/Unita.dart';
+import 'package:front_end_ing_software/model/DipendenteDTO.dart';
+import 'package:front_end_ing_software/model/GruppoDTO.dart';
+import 'package:front_end_ing_software/model/LoginF.dart';
+import 'package:front_end_ing_software/model/OrganigrammaDTO.dart';
+import 'package:front_end_ing_software/model/UnitaOrganizzativaDTO.dart';
+import 'package:front_end_ing_software/model/User.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,10 +45,11 @@ class MyHomePage extends StatefulWidget {
   final Map<String, List<Employer>> groupEmp;
   final Map<String, Map<Node, List<Node>>> proviamo;
   final Map<Node, List<Graph>> nodeGraphs;
-  final Map<String, List<Dipendente>> gruppoDipendente;
-  final Map<String, List<Gruppo>> unitaGruppo;
-  final List<Unita> listaUnita;
+  final Map<String, List<DipendenteDTO>> gruppoDipendente;
+  final Map<String, List<GruppoDTO>> unitaGruppo;
+  final List<UnitaOrgnizzativaDTO> listaUnita;
   final bool flag;
+  final User user;
 
   MyHomePage({
     Key? key,
@@ -66,6 +69,7 @@ class MyHomePage extends StatefulWidget {
     required this.unitaGruppo,
     required this.listaUnita,
     required this.flag,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -79,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late int _orientation; // Rimuovere l'assegnazione qui
   late double _levelSeparation;
   late List<String> unitaGiaInserite;
+  late Loginf loginf;
 
   late Map<Node, List<Node>> listanodes = <Node,
       List<
@@ -89,10 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String azienda = '';
   late int check = 1;
-  late Map<String, List<Dipendente>> gruppoDipendente =
-      <String, List<Dipendente>>{};
-  late Map<String, List<Gruppo>> unitaGruppo = <String, List<Gruppo>>{};
-  late List<Unita> listaUnita = [];
+  late Map<String, List<DipendenteDTO>> gruppoDipendente =
+      <String, List<DipendenteDTO>>{};
+  late Map<String, List<GruppoDTO>> unitaGruppo = <String, List<GruppoDTO>>{};
+  late List<UnitaOrgnizzativaDTO> listaUnita = [];
 
   late bool flag = widget.flag;
 
@@ -158,9 +163,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> inviaOrganigramma() async {
-    Organigramma organigramma = Organigramma(
+    OrganigrammaDTO organigrammaDTO = OrganigrammaDTO(
         nomeAzienda: nomeA, visualizationType: "TopToBottom", nodi: listaUnita);
-    print(organigramma.toJson().toString());
+    print(jsonEncode(organigrammaDTO));  // Stampa il JSON inviato
+
     //fine creazione del RequestBody ( potrei mettere anche un tasto per far selezionare all'utente che tipo di salvataggio vuole e se sceglie il file deve inserire il nome)
 
     if (check == 0) {
@@ -169,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(organigramma.toJson()),
+        body: jsonEncode(organigrammaDTO.toJson()),
       );
 
       if (response.statusCode == 200) {
@@ -186,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(organigramma.toJson()),
+        body: jsonEncode(organigrammaDTO.toJson()),
       );
 
       if (response.statusCode == 200) {
@@ -217,6 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
     gruppoDipendente = widget.gruppoDipendente;
     unitaGruppo = widget.unitaGruppo;
     listaUnita = widget.listaUnita;
+    //loginf = widget.loginf;
   }
 
   @override
@@ -824,15 +831,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                 selectedRole != null &&
                                 selectedGroup != null) {
 //costruisco il tutto per poter effettuare la chiamata al back-end( "/salvaOrganigramma")
-                              Dipendente dipendente = Dipendente(
+                              DipendenteDTO dipendente = DipendenteDTO(
                                 nome: _nameController.text,
                                 cognome: _surnameController.text,
                                 ruolo: selectedRole!,
                               );
 
 // Funzione per controllare se un dipendente esiste già
-                              bool isDipendenteExists(Dipendente dipendente,
-                                  List<Dipendente> dipendenti) {
+                              bool isDipendenteExists(DipendenteDTO dipendente,
+                                  List<DipendenteDTO> dipendenti) {
                                 return dipendenti.any((d) =>
                                     d.nome == dipendente.nome &&
                                     d.cognome == dipendente.cognome &&
@@ -850,7 +857,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               }
 
 // Creazione del gruppo
-                              Gruppo gruppo = Gruppo(
+                              GruppoDTO gruppo = GruppoDTO(
                                 nome: selectedGroup!,
                                 dipendenteList:
                                     gruppoDipendente[selectedGroup]!,
@@ -858,7 +865,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // Funzione per controllare se un gruppo esiste già
                               bool isGruppoExists(
-                                  Gruppo gruppo, List<Gruppo> gruppi) {
+                                  GruppoDTO gruppo, List<GruppoDTO> gruppi) {
                                 return gruppi.any((g) => g.nome == gruppo.nome);
                               }
 
@@ -874,17 +881,18 @@ class _MyHomePageState extends State<MyHomePage> {
 // Gestione unità organizzativa
                               if (!listaUnita
                                   .any((u) => u.nome == node.key!.value)) {
-                                Unita unita = Unita(
+                                UnitaOrgnizzativaDTO unita =
+                                    UnitaOrgnizzativaDTO(
                                   nome: node.key!.value,
-                                  gruppoList: unitaGruppo[node.key!.value]!,
+                                  gruppi: unitaGruppo[node.key!.value]!,
                                 );
                                 listaUnita.add(unita);
                               } else {
                                 // Se esiste già, aggiungo il nuovo gruppo
-                                for (Unita u in listaUnita) {
+                                for (UnitaOrgnizzativaDTO u in listaUnita) {
                                   if (u.nome == node.key!.value) {
-                                    if (!isGruppoExists(gruppo, u.gruppoList)) {
-                                      u.gruppoList.add(gruppo);
+                                    if (!isGruppoExists(gruppo, u.gruppi)) {
+                                      u.gruppi.add(gruppo);
                                     }
                                   }
                                 }

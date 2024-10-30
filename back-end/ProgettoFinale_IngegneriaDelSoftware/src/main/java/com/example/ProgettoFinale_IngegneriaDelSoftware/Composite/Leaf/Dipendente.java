@@ -3,7 +3,7 @@ package com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Leaf;
 
 import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.CompositeOrganigrammaElement;
 import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.OrganigrammaElement;
-import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.other.Gruppo;
+import com.example.ProgettoFinale_IngegneriaDelSoftware.Composite.Composite.Gruppo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
