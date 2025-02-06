@@ -3,7 +3,7 @@ The code allows for the creation of an organization chart. The development is di
 The application features login and registration areas, role and organizational unit management. It is possible to associate employees to each unit, dividing them into groups and displaying them hierarchically. This means creating a separate organization chart that only includes the employees of a specific group (this is possible for all groups).
 
 # FRONT-END:
-To run the application, set "DEVICE TO USE" to "CHROME".
+To run the application, set "DEVICE TO USE" to "CHROME" (or whatever you want ).
 The main classes are located in the lib and lib\model directories.
 
 # BACK-END:
