@@ -1,18 +1,18 @@
-# Organigramma
-Il codice permette di creare un organigramma. Lo sviluppo è suddiviso in Front-end(Flutter) e Back-end(Spring-Boot).
-L'applicazione presenta un'area di login, registrazione , inserimento dei ruoli e unità organizzative. E' possibile associare a ciascuna unità,  i dipendenti suddivisi in gruppi 
-e la loro visualizzazione gerarchica, vale a dire, la creazione di un ulteriore organigramma che prende in considerazione solo i dipendenti di quel gruppo ( è possibile con tutti i gruppi.
+# Organization Chart
+The code allows for the creation of an organization chart. The development is divided into Front-end (Flutter) and Back-end (Spring Boot).
+The application features login and registration areas, role and organizational unit management. It is possible to associate employees to each unit, dividing them into groups and displaying them hierarchically. This means creating a separate organization chart that only includes the employees of a specific group (this is possible for all groups).
+
 # FRONT-END:
-per poter eseguire l'applicazione, bisogna settare come "DEVICE TO USE" "CHROME" .
-Le classi principali si trovano nella cartella lib e \lib\model.
+To run the application, set "DEVICE TO USE" to "CHROME".
+The main classes are located in the lib and lib\model directories.
 
-# BACK-END 
-Per visualizzare le cartelle che contengono le classi e l'utilizzo dei diversi pattern presenti nel progetto, visualizza: src\main\java\... 
+# BACK-END:
+To view the directories containing the classes and the usage of different patterns in the project, refer to: src\main\java\...
 
-# IMPORTANTE 
-modificare il file: "application.properties". Bisogna solo creare un Data Base, e modificare i campi presenti, le tabelle verranno costruite non appena si avvierà il back-end del progetto 
+# IMPORTANT:
+Modify the file: application.properties. You only need to create a database and modify the fields; the tables will be automatically created when the back-end of the project is started.
 
-# NOTA
-Per poter utilizzare il DTO e il Mapper, non si è potuta stabilire la relazione tra User e Organigramma in quanto la prima è astratta ( per la corretta impostazione del Patter FACTORY METHOD ), questo crea un  conflitto con la procedura di creazione del Mapper. 
-Se non si utilizza il mapper e quindi si "uncomment"  il codice all'interno del DBSave e si commenta il codice che attualmente utilizza i DTO , il Mapper, e eliminando le tabelle, si creano nuovamente tutte le tabelle e in questo caso si va a creare la relazione 
-tra User e Organigramma.
+# NOTE:
+To use the DTO and Mapper, it was not possible to establish the relationship between User and Organigram as the former is abstract (for the correct implementation of the FACTORY METHOD pattern). This creates a conflict with the Mapper creation process.
+If the mapper is not used, and the code inside DBSave is uncommented while commenting out the code that currently uses the DTO, Mapper, and removing the tables, all tables will be recreated, and in this case, the relationship between User and Organigram will be established.
+
